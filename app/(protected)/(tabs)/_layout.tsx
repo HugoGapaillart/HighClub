@@ -14,32 +14,28 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: "Accueil",
-          tabBarIcon: ({ size, color }) => <House size={size} color={color} />,
+          tabBarIcon: ({ color }) => <House size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="events"
         options={{
           title: "Évènements",
-          tabBarIcon: ({ size, color }) => (
-            <Calendar size={size} color={color} />
-          ),
+          tabBarIcon: ({ color }) => <Calendar size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="tickets"
         options={{
           title: "Mes tickets",
-          tabBarIcon: ({ size, color }) => (
-            <Tickets size={size} color={color} />
-          ),
+          tabBarIcon: ({ color }) => <Tickets size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="profile"
         options={{
           title: "Profil",
-          tabBarIcon: ({ size, color }) => <User size={size} color={color} />,
+          tabBarIcon: ({ color }) => <User size={24} color={color} />,
         }}
       />
     </Tabs>
