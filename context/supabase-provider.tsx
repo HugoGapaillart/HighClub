@@ -1,9 +1,9 @@
 import {
-	createContext,
-	PropsWithChildren,
-	useContext,
-	useEffect,
-	useState,
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useEffect,
+  useState,
 } from "react";
 import { SplashScreen, useRouter } from "expo-router";
 
@@ -14,112 +14,125 @@ import { supabase } from "@/config/supabase";
 SplashScreen.preventAutoHideAsync();
 
 type AuthState = {
-	initialized: boolean;
-	session: Session | null;
-	signUp: (email: string, password: string) => Promise<void>;
-	signIn: (email: string, password: string) => Promise<void>;
-	signOut: () => Promise<void>;
+  initialized: boolean;
+  session: Session | null;
+  signUp: (email: string, password: string) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<void>;
+  signOut: () => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthState>({
-	initialized: false,
-	session: null,
-	signUp: async () => {},
-	signIn: async () => {},
-	signOut: async () => {},
+  initialized: false,
+  session: null,
+  signUp: async () => {},
+  signIn: async () => {},
+  signOut: async () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
 
 export function AuthProvider({ children }: PropsWithChildren) {
-	const [initialized, setInitialized] = useState(false);
-	const [session, setSession] = useState<Session | null>(null);
-	const router = useRouter();
+  const [initialized, setInitialized] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
+  const router = useRouter();
 
-	const signUp = async (email: string, password: string) => {
-		const { data, error } = await supabase.auth.signUp({
-			email,
-			password,
-		});
+  const signUp = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
 
-		if (error) {
-			console.error("Error signing up:", error);
-			return;
-		}
+    if (error) {
+      console.error("Error signing up:", error);
+      return;
+    }
 
-		if (data.session) {
-			setSession(data.session);
-			console.log("User signed up:", data.user);
-		} else {
-			console.log("No user returned from sign up");
-		}
-	};
+    if (data.user) {
+      const { error: insertError } = await supabase.from("profile").insert({
+        id: data.user.id,
+        email: data.user.email,
+      });
 
-	const signIn = async (email: string, password: string) => {
-		const { data, error } = await supabase.auth.signInWithPassword({
-			email,
-			password,
-		});
+      if (insertError) {
+        console.error("Error inserting user:", insertError);
+      } else {
+        console.log("User added to user table:", data.user);
+      }
+    }
 
-		if (error) {
-			console.error("Error signing in:", error);
-			return;
-		}
+    if (data.session) {
+      setSession(data.session);
+      console.log("User signed up:", data.user);
+    } else {
+      console.log("No user returned from sign up");
+    }
+  };
 
-		if (data.session) {
-			setSession(data.session);
-			console.log("User signed in:", data.user);
-		} else {
-			console.log("No user returned from sign in");
-		}
-	};
+  const signIn = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
 
-	const signOut = async () => {
-		const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Error signing in:", error);
+      return;
+    }
 
-		if (error) {
-			console.error("Error signing out:", error);
-			return;
-		} else {
-			console.log("User signed out");
-		}
-	};
+    if (data.session) {
+      setSession(data.session);
+      console.log("User signed in:", data.user);
+    } else {
+      console.log("No user returned from sign in");
+    }
+  };
 
-	useEffect(() => {
-		supabase.auth.getSession().then(({ data: { session } }) => {
-			setSession(session);
-		});
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
 
-		supabase.auth.onAuthStateChange((_event, session) => {
-			setSession(session);
-		});
+    if (error) {
+      console.error("Error signing out:", error);
+      return;
+    } else {
+      console.log("User signed out");
+    }
+  };
 
-		setInitialized(true);
-	}, []);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
 
-	useEffect(() => {
-		if (initialized) {
-			SplashScreen.hideAsync();
-			if (session) {
-				router.replace("/");
-			} else {
-				router.replace("/welcome");
-			}
-		}
-		// eslint-disable-next-line
-	}, [initialized, session]);
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
 
-	return (
-		<AuthContext.Provider
-			value={{
-				initialized,
-				session,
-				signUp,
-				signIn,
-				signOut,
-			}}
-		>
-			{children}
-		</AuthContext.Provider>
-	);
+    setInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    if (initialized) {
+      SplashScreen.hideAsync();
+      if (session) {
+        router.replace("/");
+      } else {
+        router.replace("/welcome");
+      }
+    }
+    // eslint-disable-next-line
+  }, [initialized, session]);
+
+  return (
+    <AuthContext.Provider
+      value={{
+        initialized,
+        session,
+        signUp,
+        signIn,
+        signOut,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }
