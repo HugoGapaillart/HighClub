@@ -1,15 +1,56 @@
-import { View } from "react-native";
-
-import { H1, Muted } from "@/components/ui/typography";
+import { H1 } from "@/components/ui/typography";
+import { Text, TouchableOpacity, View, ScrollView } from "react-native";
+import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { Tickets, Gamepad2, CircleDollarSign } from "lucide-react-native";
+import EventCard from "@/app/components/event-card";
 
 export default function Home() {
   return (
-    <View className="flex-1 items-center justify-center bg-background p-4 gap-y-4">
-      <H1 className="text-center">Home</H1>
-      <Muted className="text-center">
-        You are now authenticated and this session will persist even after
-        closing the app.
-      </Muted>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView className="flex-1 bg-background pt-4 px-4" edges={["top"]}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <H1>Théo Marchand</H1>
+          <Text>234 points</Text>
+
+          {/* Card club */}
+
+          <View className="flex-row gap-2 mt-10 mb-2">
+            <View className="bg-red-500 px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+              <Tickets size={24} color="white" />
+              <Text>Acheter une entrée</Text>
+            </View>
+            <View className="bg-blue-500 px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+              <Tickets size={24} color="white" />
+              <Text>Acheter une conso</Text>
+            </View>
+          </View>
+
+          <View className="flex-row gap-2">
+            <View className="bg-green-500 px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+              <Gamepad2 size={24} color="white" />
+              <Text>Jeux</Text>
+            </View>
+            <View className="bg-yellow-500 px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+              <CircleDollarSign size={24} color="white" />
+              <Text>Récompenses</Text>
+              <Text>234 points</Text>
+            </View>
+          </View>
+
+          <View className="mt-10">
+            <View className="flex-row items-center justify-between">
+              <Text className="text-xl font-bold">Évènements</Text>
+              <TouchableOpacity>
+                <Text>Voir plus</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View className="mt-5">
+              <EventCard />
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
