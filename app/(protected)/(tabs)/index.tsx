@@ -4,6 +4,17 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { Tickets, Gamepad2, CircleDollarSign } from "lucide-react-native";
 import EventCard from "@/app/components/event-card";
 
+const mockEvents = [
+  {
+    id: 1,
+    title: "Tranceform - Mandragora, La P'tite Fumée & more",
+    date: "Vendredi 28 juillet 23:30",
+  },
+  { id: 2, title: "Soirée Techno Underground", date: "2 août 23:30" },
+  { id: 3, title: "Electro Chill Party", date: "10 août 23:30" },
+  { id: 4, title: "Mandragora Special Night", date: "17 août 23:30" },
+];
+
 export default function Home() {
   return (
     <SafeAreaProvider>
@@ -45,8 +56,12 @@ export default function Home() {
               </TouchableOpacity>
             </View>
 
-            <View className="mt-5">
-              <EventCard />
+            <View className="my-5 flex-col gap-6">
+              {mockEvents.map((event) => (
+                <View key={event.id}>
+                  <EventCard title={event.title} date={event.date} />
+                </View>
+              ))}
             </View>
           </View>
         </ScrollView>
