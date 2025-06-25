@@ -1,72 +1,139 @@
 import React, { useState } from "react";
-import { Modal, View, Text, TextInput, TouchableOpacity } from "react-native";
-import { supabase } from "@/config/supabase";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Modal,
+} from "react-native";
+import { useUser } from "@/context/user-provider"; // 🔥 utilise le contexte
 import { useAuth } from "@/context/supabase-provider";
 
 export default function ProfilEdit() {
   const { session } = useAuth();
-
+  const { refreshProfile, profile, updateProfile } = useUser(); // 🔥
   const [modalVisible, setModalVisible] = useState(false);
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [phone, setPhone] = useState("");
+
+  const [firstname, setFirstname] = useState(profile?.firstname || "");
+  const [lastname, setLastname] = useState(profile?.lastname || "");
+  const [phone, setPhone] = useState(profile?.phone || "");
+  const [email, setEmail] = useState(profile?.email || "");
+  const [emailError, setEmailError] = useState("");
 
   const handleUpdate = async () => {
-    const { error } = await supabase
-      .from("profile")
-      .update({ firstname, lastname, phone })
-      .eq("id", session?.user.id);
-
-    if (error) {
-      console.error("Erreur lors de la mise à jour :", error.message);
-    } else {
-      setModalVisible(false);
-    }
+    await updateProfile({ firstname, lastname, phone, email });
+    await refreshProfile();
+    setModalVisible(false);
   };
+
+  const formatPhone = (text: string) => {
+    const digits = text.replace(/\D/g, "").slice(0, 10);
+    return digits.replace(/(\d{2})(?=\d)/g, "$1 ").trim();
+  };
+
+  function isValidEmail(email: string) {
+    // Regex simple pour vérifier l'email
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
 
   return (
     <>
       <TouchableOpacity
         onPress={() => setModalVisible(true)}
-        className="bg-blue-600 rounded-lg p-2 w-full"
+        className="bg-blue-600 rounded-lg p-4 w-full"
       >
-        <Text className="text-white text-center">Modifier le profil</Text>
+        <Text className="text-white text-center font-semibold">
+          Modifier le profil
+        </Text>
       </TouchableOpacity>
 
       <Modal visible={modalVisible} animationType="slide" transparent>
-        <View className="flex-1 justify-center items-center bg-black/50">
-          <View className="bg-white rounded-xl p-6 w-11/12">
-            <Text className="text-xl font-bold mb-4">Modifier mes infos</Text>
-            <TextInput
-              placeholder="Prénom"
-              value={firstname}
-              onChangeText={setFirstname}
-              className="border border-gray-300 rounded p-2 mb-2"
-            />
-            <TextInput
-              placeholder="Nom"
-              value={lastname}
-              onChangeText={setLastname}
-              className="border border-gray-300 rounded p-2 mb-2"
-            />
-            <TextInput
-              placeholder="Téléphone"
-              value={phone}
-              onChangeText={setPhone}
-              keyboardType="phone-pad"
-              className="border border-gray-300 rounded p-2 mb-4"
-            />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View className="flex-1 justify-center items-center bg-black/50">
+            <KeyboardAvoidingView
+              behavior={Platform.OS === "ios" ? "padding" : "height"}
+              className="w-full"
+            >
+              <ScrollView
+                contentContainerStyle={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  paddingVertical: 40,
+                  paddingHorizontal: 20,
+                }}
+              >
+                <View className="bg-white rounded-xl p-6 w-full">
+                  <Text className="text-xl font-bold mb-4">
+                    Modifier mes infos
+                  </Text>
 
-            <View className="flex-row justify-between">
-              <TouchableOpacity onPress={() => setModalVisible(false)}>
-                <Text className="text-red-500">Annuler</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={handleUpdate}>
-                <Text className="text-blue-600 font-bold">Enregistrer</Text>
-              </TouchableOpacity>
-            </View>
+                  <Text className="text-gray-700 mb-1">Prénom</Text>
+                  <TextInput
+                    placeholder="Prénom"
+                    value={firstname}
+                    onChangeText={setFirstname}
+                    className="border border-gray-300 rounded px-3 py-2 mb-3"
+                  />
+
+                  <Text className="text-gray-700 mb-1">Nom</Text>
+                  <TextInput
+                    placeholder="Nom"
+                    value={lastname}
+                    onChangeText={setLastname}
+                    className="border border-gray-300 rounded px-3 py-2 mb-3"
+                  />
+
+                  <Text className="text-gray-700 mb-1">Email</Text>
+                  <TextInput
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={(text) => {
+                      setEmail(text);
+                      setEmailError(isValidEmail(text) ? "" : "Email invalide");
+                    }}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    className={`border ${
+                      emailError ? "border-red-500" : "border-gray-300"
+                    } rounded px-3 py-2`}
+                  />
+                  {emailError ? (
+                    <Text className="text-red-500 text-sm mt-1">
+                      {emailError}
+                    </Text>
+                  ) : null}
+
+                  <Text className="text-gray-700 mb-1 mt-3">Téléphone</Text>
+                  <TextInput
+                    placeholder="Téléphone"
+                    value={phone}
+                    onChangeText={(text) => setPhone(formatPhone(text))}
+                    keyboardType="phone-pad"
+                    className="border border-gray-300 rounded px-3 py-2 mb-4"
+                  />
+
+                  <View className="flex-row justify-between mt-4">
+                    <TouchableOpacity onPress={() => setModalVisible(false)}>
+                      <Text className="text-red-500">Annuler</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleUpdate}>
+                      <Text className="text-blue-600 font-bold">
+                        Enregistrer
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </ScrollView>
+            </KeyboardAvoidingView>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </Modal>
     </>
   );
