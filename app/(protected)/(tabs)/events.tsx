@@ -24,11 +24,11 @@ export default function Events() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView className="flex-1 bg-background pt-4 px-4" edges={["top"]}>
+      <SafeAreaView className="flex-1 bg-[#100f1b] pt-4 px-4" edges={["top"]}>
         <View className="mb-4">
-          <H1 className="mb-6">Évènements</H1>
+          <H1 className="text-white mb-6">Évènements</H1>
           <TextInput
-            className="border border-gray-300 rounded-md p-2"
+            className="border border-white/30 rounded-md p-2 text-white placeholder:text-white/30"
             placeholder="Rechercher"
             value={value}
             onChangeText={setValue}
@@ -37,7 +37,7 @@ export default function Events() {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View className="mt-3">
             {filteredEvents.length === 0 ? (
-              <Text className="text-gray-500 text-center mt-8">
+              <Text className="text-white/60 text-center mt-8">
                 Aucun évènement trouvé.
               </Text>
             ) : (
