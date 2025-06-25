@@ -19,10 +19,10 @@ const mockEvents = [
 export default function Home() {
   return (
     <SafeAreaProvider>
-      <SafeAreaView className="flex-1 bg-background pt-4 px-4" edges={["top"]}>
+      <SafeAreaView className="flex-1 bg-[#100f1b] pt-4 px-4" edges={["top"]}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <H1>Théo Marchand</H1>
-          <Text className="mt-1">234 points</Text>
+          <H1 className="text-white">Théo Marchand</H1>
+          <Text className="mt-1 text-white">234 points</Text>
 
           {/* Card club */}
 
@@ -51,11 +51,11 @@ export default function Home() {
 
           <View className="mt-10">
             <View className="flex-row items-center justify-between">
-              <Text className="text-xl font-bold">Évènements</Text>
+              <Text className="text-xl font-bold text-white">Évènements</Text>
               <TouchableOpacity
                 onPress={() => router.push("/(protected)/(tabs)/events")}
               >
-                <Text>Voir plus</Text>
+                <Text className="text-[#9400FF] font-medium">Voir plus</Text>
               </TouchableOpacity>
             </View>
 

@@ -25,20 +25,22 @@ export default function Event() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView className="flex-1 bg-background" edges={["top", "bottom"]}>
+      <SafeAreaView className="flex-1 bg-[#211f39]" edges={["top", "bottom"]}>
         <View className="flex-1">
           <Image
             source={require("assets/mandragora.webp")}
             className="w-full h-60"
           />
           <View className="mt-6 px-4">
-            <Text className="text-2xl font-bold">{filteredEvent.title}</Text>
-            <Text className="text-gray-500 mt-3">{filteredEvent.date}</Text>
+            <Text className="text-2xl text-white font-bold">
+              {filteredEvent.title}
+            </Text>
+            <Text className="text-white/60 mt-3">{filteredEvent.date}</Text>
           </View>
 
           {/* Fixed bottom button */}
-          <View className="absolute bottom-0 left-0 right-0 px-4 pb-4 bg-background">
-            <Button>
+          <View className="absolute bottom-4 left-4 right-4">
+            <Button className="bg-[#9400FF]">
               <Text className="text-white font-bold text-center">
                 Réserver une place
               </Text>

@@ -23,9 +23,11 @@ export default function EventCard({
           className="w-full h-56"
           resizeMode="cover"
         />
-        <View className="bg-slate-200 p-4">
-          <Text className="text-gray-500 text-sm">{date}</Text>
-          <Text className="font-bold text-lg mt-2 leading-snug">{title}</Text>
+        <View className="bg-[#211f39] p-4">
+          <Text className="text-white/60 text-sm">{date}</Text>
+          <Text className="font-bold text-lg mt-2 leading-snug text-white">
+            {title}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
