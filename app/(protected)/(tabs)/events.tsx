@@ -43,7 +43,11 @@ export default function Events() {
             ) : (
               filteredEvents.map((event) => (
                 <View className="mb-6" key={event.id}>
-                  <EventCard title={event.title} date={event.date} />
+                  <EventCard
+                    id={event.id}
+                    title={event.title}
+                    date={event.date}
+                  />
                 </View>
               ))
             )}

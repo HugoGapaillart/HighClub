@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View, ScrollView } from "react-native";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { Tickets, Gamepad2, CircleDollarSign } from "lucide-react-native";
 import EventCard from "@/app/components/event-card";
+import { router } from "expo-router";
 
 const mockEvents = [
   {
@@ -21,7 +22,7 @@ export default function Home() {
       <SafeAreaView className="flex-1 bg-background pt-4 px-4" edges={["top"]}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <H1>Théo Marchand</H1>
-          <Text>234 points</Text>
+          <Text className="mt-1">234 points</Text>
 
           {/* Card club */}
 
@@ -51,7 +52,9 @@ export default function Home() {
           <View className="mt-10">
             <View className="flex-row items-center justify-between">
               <Text className="text-xl font-bold">Évènements</Text>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => router.push("/(protected)/(tabs)/events")}
+              >
                 <Text>Voir plus</Text>
               </TouchableOpacity>
             </View>
@@ -59,7 +62,11 @@ export default function Home() {
             <View className="my-5 flex-col gap-6">
               {mockEvents.map((event) => (
                 <View key={event.id}>
-                  <EventCard title={event.title} date={event.date} />
+                  <EventCard
+                    id={event.id}
+                    title={event.title}
+                    date={event.date}
+                  />
                 </View>
               ))}
             </View>
