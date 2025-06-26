@@ -10,7 +10,7 @@ import { H1, H2, Muted } from "@/components/ui/typography"
 
 // Données simulées (à remplacer par votre API)
 const getTicketData = (id: string) => {
-  const tickets = {
+  const tickets: Record<string, any> = {
     "1": {
       id: "1",
       event: "Soirée d'inauguration",
@@ -93,7 +93,7 @@ export default function TicketDetail() {
         text: "Écrire un avis",
         onPress: () => {
           // Navigation vers la page d'avis
-          router.push(`/review/${ticket.id}`)
+        //   router.push(`/review/${ticket.id}`)
         },
       },
     ])
@@ -129,7 +129,8 @@ export default function TicketDetail() {
 
   const handleBuyConsumptions = () => {
     // Navigation vers la page d'achat de consommations
-    router.push(`/buy-consumptions/${ticket.id}`)
+    // router.push(`/buy-consumptions/${ticket.id}`)
+    console.log("Navigation vers page d'achat de consommations")
   }
 
   const handleShareTicket = async () => {
