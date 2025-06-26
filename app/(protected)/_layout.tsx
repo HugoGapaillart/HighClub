@@ -23,7 +23,9 @@ export default function ProtectedLayout() {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="(tabs)" />
+      <Stack.Screen name="index" /> {/* Page de redirection */}
+      <Stack.Screen name="(tabs)" /> {/* Vos tabs utilisateur */}
+      <Stack.Screen name="(admin)" /> {/* Vos routes admin */}
       <Stack.Screen name="event/[id]" options={{ presentation: "modal" }} />
     </Stack>
   );

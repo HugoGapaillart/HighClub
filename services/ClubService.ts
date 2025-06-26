@@ -1,9 +1,16 @@
 import { supabase } from "@/config/supabase";
 
 export class ClubService {
-  static async getById(id: string) {
+  static async getAllClubs() {
+    const { data, error } = await supabase.from("club").select("*");
+    if (error) throw error;
+    console.log("Clubs fetched:", data);
+    return data;
+  }
+
+  static async getClubById(id: string) {
     const { data, error } = await supabase
-      .from("clubs")
+      .from("club")
       .select("*")
       .eq("id", id)
       .single();

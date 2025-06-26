@@ -1,7 +1,22 @@
 import { supabase } from "@/config/supabase";
 
 export class EventService {
-  static async getById(id: string) {
+  static async getAllEvents() {
+    const { data, error } = await supabase.from("events").select("*");
+    if (error) throw error;
+    return data;
+  }
+
+  static async getClubEvents(clubId: string) {
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .eq("club_id", clubId);
+    if (error) throw error;
+    return data;
+  }
+
+  static async getEventById(id: string) {
     const { data, error } = await supabase
       .from("events")
       .select("*")

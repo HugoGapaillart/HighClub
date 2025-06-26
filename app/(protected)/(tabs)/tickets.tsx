@@ -1,7 +1,8 @@
 import { ScrollView, View, TouchableOpacity, Alert } from "react-native";
 import { Image } from "@/components/image";
 import { Text } from "@/components/ui/text";
-import { H1 } from "@/components/ui/typography";
+import { H1, Muted } from "@/components/ui/typography";
+import { useUser } from "@/context/user-provider";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 // import { Badge } from "@/components/ui/badge";
 // import { Button } from "@/components/ui/button";
@@ -49,6 +50,9 @@ const tickets = [
 ];
 
 const getStatusInfo = (status: string, entryUsed: boolean) => {
+  const { user, profile, loading } = useUser();
+  console.log("user:", user);
+  console.log("profile:", profile);
   switch (status) {
     case "upcoming":
       return {

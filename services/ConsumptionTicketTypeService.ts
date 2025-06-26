@@ -1,6 +1,15 @@
 import { supabase } from "@/config/supabase";
 
 export class ConsumptionTicketTypeService {
+  static async getClubConsumptionTypes(clubId: string) {
+    const { data, error } = await supabase
+      .from("consumption_ticket_types")
+      .select("*")
+      .eq("club_id", clubId);
+    if (error) throw error;
+    return data;
+  }
+
   static async getById(id: string) {
     const { data, error } = await supabase
       .from("consumption_ticket_types")

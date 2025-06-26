@@ -1,6 +1,16 @@
 import { supabase } from "@/config/supabase";
 
 export class AdminService {
+  static async getClubStats(clubId: string) {
+    // This is just an example, you might need a more complex query or an RPC function
+    const { data, error } = await supabase
+      .from("events")
+      .select("id, name, ticket_sales, revenue")
+      .eq("club_id", clubId);
+    if (error) throw error;
+    return data;
+  }
+
   static async getById(id: string) {
     const { data, error } = await supabase
       .from("admins")
