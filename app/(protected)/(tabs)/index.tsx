@@ -4,6 +4,7 @@ import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { Tickets, Gamepad2, CircleDollarSign } from "lucide-react-native";
 import EventCard from "@/app/components/event-card";
 import { router } from "expo-router";
+import { useUser } from "@/context/user-provider";
 
 const mockEvents = [
   {
@@ -17,12 +18,18 @@ const mockEvents = [
 ];
 
 export default function Home() {
+  const { profile } = useUser();
+
   return (
     <SafeAreaProvider>
       <SafeAreaView className="flex-1 bg-[#100f1b] pt-4 px-4" edges={["top"]}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <H1 className="text-white">Théo Marchand</H1>
-          <Text className="mt-1 text-white">234 points</Text>
+          <H1 className="text-white">
+            {profile?.firstname} {profile?.lastname}
+          </H1>
+          <Text className="mt-1 text-white">
+            {profile?.loyalty_points} points
+          </Text>
 
           {/* Card club */}
 

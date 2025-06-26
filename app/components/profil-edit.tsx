@@ -46,7 +46,7 @@ export default function ProfilEdit() {
     <>
       <TouchableOpacity
         onPress={() => setModalVisible(true)}
-        className="bg-blue-600 rounded-lg p-4 w-full"
+        className="bg-[#9400FF] rounded-lg p-4 w-full"
       >
         <Text className="text-white text-center font-semibold">
           Modifier le profil
@@ -68,28 +68,28 @@ export default function ProfilEdit() {
                   paddingHorizontal: 20,
                 }}
               >
-                <View className="bg-white rounded-xl p-6 w-full">
-                  <Text className="text-xl font-bold mb-4">
+                <View className="bg-[#211f39] rounded-xl p-6 w-full">
+                  <Text className="text-xl font-bold mb-4 text-white">
                     Modifier mes infos
                   </Text>
 
-                  <Text className="text-gray-700 mb-1">Prénom</Text>
+                  <Text className="text-white mb-1">Prénom</Text>
                   <TextInput
                     placeholder="Prénom"
                     value={firstname}
                     onChangeText={setFirstname}
-                    className="border border-gray-300 rounded px-3 py-2 mb-3"
+                    className="border border-gray-300 bg-white rounded px-3 py-2 mb-3"
                   />
 
-                  <Text className="text-gray-700 mb-1">Nom</Text>
+                  <Text className="text-white mb-1">Nom</Text>
                   <TextInput
                     placeholder="Nom"
                     value={lastname}
                     onChangeText={setLastname}
-                    className="border border-gray-300 rounded px-3 py-2 mb-3"
+                    className="border border-gray-300 bg-white rounded px-3 py-2 mb-3"
                   />
 
-                  <Text className="text-gray-700 mb-1">Email</Text>
+                  <Text className="text-white mb-1">Email</Text>
                   <TextInput
                     placeholder="Email"
                     value={email}
@@ -102,7 +102,7 @@ export default function ProfilEdit() {
                     autoCorrect={false}
                     className={`border ${
                       emailError ? "border-red-500" : "border-gray-300"
-                    } rounded px-3 py-2`}
+                    } bg-white rounded px-3 py-2`}
                   />
                   {emailError ? (
                     <Text className="text-red-500 text-sm mt-1">
@@ -110,21 +110,21 @@ export default function ProfilEdit() {
                     </Text>
                   ) : null}
 
-                  <Text className="text-gray-700 mb-1 mt-3">Téléphone</Text>
+                  <Text className="text-white mb-1 mt-3">Téléphone</Text>
                   <TextInput
                     placeholder="Téléphone"
                     value={phone}
                     onChangeText={(text) => setPhone(formatPhone(text))}
                     keyboardType="phone-pad"
-                    className="border border-gray-300 rounded px-3 py-2 mb-4"
+                    className="border border-gray-300 bg-white rounded px-3 py-2 mb-4"
                   />
 
                   <View className="flex-row justify-between mt-4">
                     <TouchableOpacity onPress={() => setModalVisible(false)}>
-                      <Text className="text-red-500">Annuler</Text>
+                      <Text className="text-red-600 font-bold">Annuler</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={handleUpdate}>
-                      <Text className="text-blue-600 font-bold">
+                      <Text className="text-[#9400FF] font-bold">
                         Enregistrer
                       </Text>
                     </TouchableOpacity>
