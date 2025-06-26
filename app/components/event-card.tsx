@@ -6,20 +6,25 @@ export default function EventCard({
   id,
   title,
   date,
+  image_url,
 }: {
-  id: number;
+  id: string;
   title: string;
   date: string;
+  image_url: string | null;
 }) {
   const handlePress = () => {
     router.push(`/event/${id}`);
   };
-
+  const imageSource =
+    image_url && image_url.trim() !== ""
+      ? { uri: image_url }
+      : require("assets/mandragora.webp");
   return (
     <TouchableOpacity onPress={handlePress}>
       <View className="rounded-2xl overflow-hidden">
         <Image
-          source={require("assets/mandragora.jpg")}
+          source={imageSource}
           className="w-full h-56"
           resizeMode="cover"
         />
