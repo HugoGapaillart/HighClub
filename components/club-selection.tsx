@@ -66,7 +66,7 @@ export const ClubSelector = ({
             {selectedClub?.name || placeholder}
           </Text>
         </View>
-        <ChevronDown size={20} color="black" />
+        <ChevronDown size={20} color="white" />
       </TouchableOpacity>
 
       <Modal
@@ -88,7 +88,7 @@ export const ClubSelector = ({
                   style={styles.closeButton}
                   hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
                 >
-                  <X size={20} color="black" />
+                  <X size={20} color="white" />
                 </TouchableOpacity>
               </View>
 
@@ -122,7 +122,7 @@ export const ClubSelector = ({
                       </View>
                     </View>
                     {selectedClub?.id === item.id && (
-                        <CheckCircle size={20} color="green" />
+                      <CheckCircle size={20} color="green" />
                     )}
                   </TouchableOpacity>
                 )}
@@ -143,11 +143,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: "#fff",
+    backgroundColor: "#211f39",
     borderRadius: 12,
-    borderWidth: 1,
-    borderColor: "#e9ecef",
-    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
@@ -170,12 +167,12 @@ const styles = StyleSheet.create({
   clubName: {
     fontSize: 16,
     fontWeight: "500",
-    color: "#333",
+    color: "#fff",
     flex: 1,
   },
   placeholder: {
     fontSize: 16,
-    color: "#999",
+    color: "#fff",
   },
   modalOverlay: {
     flex: 1,
@@ -183,7 +180,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   modalContent: {
-    backgroundColor: "white",
+    backgroundColor: "#100f1b",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     maxHeight: "80%",
@@ -201,7 +198,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: "600",
-    color: "#333",
+    color: "#fff",
   },
   closeButton: {
     padding: 4,
@@ -219,7 +216,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   selectedClub: {
-    backgroundColor: "#f0f8ff",
+    backgroundColor: "#211f39",
   },
   itemLogo: {
     width: 44,
@@ -233,12 +230,12 @@ const styles = StyleSheet.create({
   clubItemName: {
     fontSize: 16,
     fontWeight: "500",
-    color: "#333",
+    color: "rgba(255, 255, 255, 0.85)",
     marginBottom: 4,
   },
   clubAddress: {
     fontSize: 14,
-    color: "#666",
+    color: "rgba(255, 255, 255, 0.6)",
   },
   separator: {
     height: 1,

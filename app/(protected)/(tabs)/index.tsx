@@ -26,17 +26,20 @@ export default function Home() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView className="flex-1 bg-background pt-4 px-4" edges={["top"]}>
+      <SafeAreaView className="flex-1 bg-[#100f1b] pt-4 px-4" edges={["top"]}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <H1>{name}</H1>
-          <Text className="mt-1">{profile?.loyalty_points ?? 0} points</Text>
+          <H1 className="text-white">{name}</H1>
+          <Text className="text-white mt-1">
+            {profile?.loyalty_points ?? 0} points
+          </Text>
 
-          {/* Card club */}
-          <ClubSelector
-            clubs={allClubs}
-            selectedClub={selectedClub}
-            onSelectClub={selectClub}
-          />
+          <View className="mt-6">
+            <ClubSelector
+              clubs={allClubs}
+              selectedClub={selectedClub}
+              onSelectClub={selectClub}
+            />
+          </View>
 
           <View className="flex-row gap-2 mt-10 mb-2">
             <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
@@ -56,8 +59,10 @@ export default function Home() {
             </View>
             <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
               <CircleDollarSign size={24} color="white" />
-              <Text>Récompenses</Text>
-              <Text>{profile?.loyalty_points ?? 0} points</Text>
+              <Text className="text-white">Récompenses</Text>
+              <Text className="text-white">
+                {profile?.loyalty_points ?? 0} points
+              </Text>
             </View>
           </View>
 
