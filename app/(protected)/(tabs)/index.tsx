@@ -7,7 +7,6 @@ import { router } from "expo-router";
 import { useUser } from "@/context/user-provider";
 import { ClubSelector } from "@/components/club-selection";
 import { useClubSelection } from "@/hooks/useClubSelection";
-import { useClubEvents, useRealtimeSubscription } from "@/hooks/useQueries";
 
 const mockEvents = [
   {
@@ -24,34 +23,38 @@ export default function Home() {
   const { user, profile, getDisplayName } = useUser();
   const name = getDisplayName();
   const { allClubs, selectedClub, selectClub } = useClubSelection();
-  
+
   return (
     <SafeAreaProvider>
       <SafeAreaView className="flex-1 bg-background pt-4 px-4" edges={["top"]}>
-        <ScrollView showsVerticalScrollIndicator={false}> 
+        <ScrollView showsVerticalScrollIndicator={false}>
           <H1>{name}</H1>
           <Text className="mt-1">{profile?.loyalty_points ?? 0} points</Text>
 
           {/* Card club */}
-          <ClubSelector clubs={allClubs} selectedClub={selectedClub} onSelectClub={selectClub} />
+          <ClubSelector
+            clubs={allClubs}
+            selectedClub={selectedClub}
+            onSelectClub={selectClub}
+          />
 
           <View className="flex-row gap-2 mt-10 mb-2">
-            <View className="bg-red-500 px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+            <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
               <Tickets size={24} color="white" />
-              <Text>Acheter une entrée</Text>
+              <Text className="text-white">Acheter une entrée</Text>
             </View>
-            <View className="bg-blue-500 px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+            <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
               <Tickets size={24} color="white" />
-              <Text>Acheter une conso</Text>
+              <Text className="text-white">Acheter une conso</Text>
             </View>
           </View>
 
           <View className="flex-row gap-2">
-            <View className="bg-green-500 px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+            <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
               <Gamepad2 size={24} color="white" />
-              <Text>Jeux</Text>
+              <Text className="text-white">Jeux</Text>
             </View>
-            <View className="bg-yellow-500 px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+            <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
               <CircleDollarSign size={24} color="white" />
               <Text>Récompenses</Text>
               <Text>{profile?.loyalty_points ?? 0} points</Text>

@@ -44,6 +44,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      expo-blur:
+        specifier: ~14.1.5
+        version: 14.1.5(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@5.0.4(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
       expo-constants:
         specifier: ~17.1.6
         version: 17.1.6(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@5.0.4(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))
@@ -2414,6 +2417,13 @@ packages:
       react: '*'
       react-native: '*'
 
+  expo-blur@14.1.5:
+    resolution: {integrity: sha512-CCLJHxN4eoAl06ESKT3CbMasJ98WsjF9ZQEJnuxtDb9ffrYbZ+g9ru84fukjNUOTtc8A8yXE5z8NgY1l0OMrmQ==}
+    peerDependencies:
+      expo: '*'
+      react: '*'
+      react-native: '*'
+
   expo-constants@17.1.6:
     resolution: {integrity: sha512-q5mLvJiLtPcaZ7t2diSOlQ2AyxIO8YMVEJsEfI/ExkGj15JrflNQ7CALEW6IF/uNae/76qI/XcjEuuAyjdaCNw==}
     peerDependencies:
@@ -3998,6 +4008,9 @@ packages:
   remove-accents@0.5.0:
     resolution: {integrity: sha512-8g3/Otx1eJaVD12e31UbJj1YzdtVvzH85HV7t+9MJYk/u3XmkOUJ5Ys9wQrf9PCPK8+xn4ymzqYCiZl6QWKn+A==}
 
+  remove-accents@0.5.0:
+    resolution: {integrity: sha512-8g3/Otx1eJaVD12e31UbJj1YzdtVvzH85HV7t+9MJYk/u3XmkOUJ5Ys9wQrf9PCPK8+xn4ymzqYCiZl6QWKn+A==}
+
   repeat-string@1.6.1:
     resolution: {integrity: sha512-PV0dzCYDNfRi1jCDbJzpW7jNNDRuCOG/jI5ctQcGKt/clZD+YcPS3yIlWuTJMmESC8aevCFmWJy5wjAFgNqN6w==}
     engines: {node: '>=0.10'}
@@ -4484,6 +4497,9 @@ packages:
   unique-string@2.0.0:
     resolution: {integrity: sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg==}
     engines: {node: '>=8'}
+
+  unload@2.2.0:
+    resolution: {integrity: sha512-B60uB5TNBLtN6/LsgAf3udH9saB5p7gqJwcFfbOEZ8BcBHnGwCf6G/TGiEqkRAxX7zAFIUtzdrXQSdL3Q/wqNA==}
 
   unload@2.2.0:
     resolution: {integrity: sha512-B60uB5TNBLtN6/LsgAf3udH9saB5p7gqJwcFfbOEZ8BcBHnGwCf6G/TGiEqkRAxX7zAFIUtzdrXQSdL3Q/wqNA==}
@@ -6260,6 +6276,13 @@ snapshots:
       '@tanstack/query-core': 5.81.2
       react: 19.0.0
 
+  '@tanstack/query-core@5.81.2': {}
+
+  '@tanstack/react-query@5.81.2(react@19.0.0)':
+    dependencies:
+      '@tanstack/query-core': 5.81.2
+      react: 19.0.0
+
   '@tybys/wasm-util@0.9.0':
     dependencies:
       tslib: 2.8.1
@@ -6315,6 +6338,14 @@ snapshots:
       undici-types: 7.8.0
 
   '@types/phoenix@1.6.6': {}
+
+  '@types/react-query@1.2.9(react-dom@19.0.0(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      react-query: 3.39.3(react-dom@19.0.0(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+    transitivePeerDependencies:
+      - react
+      - react-dom
+      - react-native
 
   '@types/react-query@1.2.9(react-dom@19.0.0(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)':
     dependencies:
@@ -6836,6 +6867,18 @@ snapshots:
       rimraf: 3.0.2
       unload: 2.2.0
 
+  browserslist@4.25.0:
+  broadcast-channel@3.7.0:
+    dependencies:
+      '@babel/runtime': 7.27.6
+      detect-node: 2.1.0
+      js-sha3: 0.8.0
+      microseconds: 0.2.0
+      nano-time: 1.0.0
+      oblivious-set: 1.0.0
+      rimraf: 3.0.2
+      unload: 2.2.0
+
   browserslist@4.25.1:
     dependencies:
       caniuse-lite: 1.0.30001726
@@ -7144,6 +7187,8 @@ snapshots:
   detect-libc@1.0.3: {}
 
   detect-libc@2.0.4: {}
+
+  detect-node@2.1.0: {}
 
   detect-node@2.1.0: {}
 
@@ -7536,6 +7581,12 @@ snapshots:
       react-native: 0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)
     transitivePeerDependencies:
       - supports-color
+
+  expo-blur@14.1.5(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@5.0.4(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      expo: 53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@5.0.4(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0)
+      react: 19.0.0
+      react-native: 0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)
 
   expo-constants@17.1.6(expo@53.0.12(@babel/core@7.27.4)(@expo/metro-runtime@5.0.4(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0))(react@19.0.0))(react-native@0.79.2(@babel/core@7.27.4)(@types/react@19.0.14)(react@19.0.0)):
     dependencies:
