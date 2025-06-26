@@ -19,7 +19,7 @@ export default function EventCard({
     <TouchableOpacity onPress={handlePress}>
       <View className="rounded-2xl overflow-hidden">
         <Image
-          source={require("assets/mandragora.webp")}
+          source={require("assets/mandragora.jpg")}
           className="w-full h-56"
           resizeMode="cover"
         />

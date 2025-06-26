@@ -46,7 +46,7 @@ export default function Event() {
             </View>
           </TouchableOpacity>
           <Image
-            source={require("assets/mandragora.webp")}
+            source={require("assets/mandragora.jpg")}
             className="w-full h-60"
           />
           <View className="mt-6 px-4">

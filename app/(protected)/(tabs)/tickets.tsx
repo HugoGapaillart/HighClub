@@ -1,9 +1,10 @@
-import { ScrollView, View, TouchableOpacity, Alert } from "react-native";
+import { ScrollView, View, TouchableOpacity } from "react-native";
 import { Image } from "@/components/image";
 import { Text } from "@/components/ui/text";
-import { H1, Muted } from "@/components/ui/typography";
+import { H1 } from "@/components/ui/typography";
 import { useUser } from "@/context/user-provider";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 // import { Badge } from "@/components/ui/badge";
 // import { Button } from "@/components/ui/button";
 
@@ -83,26 +84,11 @@ const getStatusInfo = (status: string, entryUsed: boolean) => {
 
 const handleTicketPress = (ticket: any) => {
   if (ticket.status === "upcoming") {
-    Alert.alert(
-      "Événement à venir",
-      `L'événement "${ticket.event}" aura lieu le ${ticket.date} à ${ticket.time}.`,
-      [{ text: "OK" }]
-    );
+    router.push("/(protected)/details-tickets");
   } else if (ticket.status === "active") {
-    Alert.alert("Actions disponibles", "Que souhaitez-vous faire ?", [
-      { text: "Voir les détails", onPress: () => console.log("Détails") },
-      {
-        text: "Acheter des conso",
-        onPress: () => console.log("Acheter conso"),
-      },
-      { text: "Annuler", style: "cancel" },
-    ]);
+    router.push("/(protected)/details-tickets");
   } else {
-    Alert.alert(
-      "Détails de l'événement",
-      `Événement terminé\nTotal dépensé: ${ticket.totalSpent}€\nConsommations: ${ticket.consumptions}`,
-      [{ text: "OK" }]
-    );
+    router.push("/(protected)/details-tickets");
   }
 };
 

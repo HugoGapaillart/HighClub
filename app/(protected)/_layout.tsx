@@ -27,6 +27,10 @@ export default function ProtectedLayout() {
       <Stack.Screen name="(tabs)" /> {/* Vos tabs utilisateur */}
       <Stack.Screen name="(admin)" /> {/* Vos routes admin */}
       <Stack.Screen name="event/[id]" options={{ presentation: "modal" }} />
+      <Stack.Screen
+        name="details-tickets"
+        options={{ presentation: "modal" }}
+      />
     </Stack>
   );
 }

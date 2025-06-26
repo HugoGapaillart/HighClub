@@ -42,28 +42,25 @@ export default function Home() {
           </View>
 
           <View className="flex-row gap-2 mt-10 mb-2">
-            <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+            <TouchableOpacity className="bg-[#211f39] px-2 py-6 border border-white/5 flex-1 items-center justify-center gap-4 rounded-md">
               <Tickets size={24} color="white" />
               <Text className="text-white">Acheter une entrée</Text>
-            </View>
-            <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+            </TouchableOpacity>
+            <TouchableOpacity className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-4 rounded-md">
               <Tickets size={24} color="white" />
               <Text className="text-white">Acheter une conso</Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View className="flex-row gap-2">
-            <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+            <TouchableOpacity className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-4 rounded-md">
               <Gamepad2 size={24} color="white" />
               <Text className="text-white">Jeux</Text>
-            </View>
-            <View className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-1 rounded-md">
+            </TouchableOpacity>
+            <TouchableOpacity className="bg-[#211f39] px-2 py-4 border border-white/5 flex-1 items-center justify-center gap-4 rounded-md">
               <CircleDollarSign size={24} color="white" />
               <Text className="text-white">Récompenses</Text>
-              <Text className="text-white">
-                {profile?.loyalty_points ?? 0} points
-              </Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
           <View className="mt-10">
