@@ -4,7 +4,6 @@ export class ClubService {
   static async getAllClubs() {
     const { data, error } = await supabase.from("club").select("*");
     if (error) throw error;
-    console.log("Clubs fetched:", data);
     return data;
   }
 

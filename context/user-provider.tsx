@@ -107,13 +107,7 @@ import {
       try {
         const { data, error } = await supabase
           .from("admin")
-          .select(`
-            *,
-            club:club_id (
-              id,
-              name
-            )
-          `)
+          .select(`*`)
           .eq("email", email)
           .eq("is_active", true)
           .single();
@@ -122,7 +116,9 @@ import {
           console.error("Erreur lors de la récupération du profil admin:", error);
           return null;
         }
-  
+        console.log("[UserProvider] Profil admin récupéré:", data);
+        console.log("[UserProvider] Email : " + email);
+        console.log("[UserProvider] Error : " + JSON.stringify(error));
         return data;
       } catch (error) {
         console.error("Erreur lors de la récupération du profil admin:", error);
@@ -137,7 +133,7 @@ import {
         
         // D'abord, vérifier si c'est un admin
         const adminData = await fetchAdminProfile(authUser.email!);
-        
+        console.log("[UserProvider] Chargement des données utilisateur:" + adminData);
         if (adminData) {
           // C'est un admin
           setAdminProfile(adminData);

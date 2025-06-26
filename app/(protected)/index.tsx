@@ -3,7 +3,7 @@ import { View, ActivityIndicator, Text } from "react-native";
 import { useUser } from "@/context/user-provider";
 
 export default function ProtectedIndex() {
-  const { userType, loading } = useUser();
+  const { isAdmin, isUser, loading } = useUser();
 
   // Pendant le chargement
   if (loading) {
@@ -16,9 +16,9 @@ export default function ProtectedIndex() {
   }
 
   // Redirection selon le type d'utilisateur
-  if (userType === "admin") {
-    return <Redirect href="/(protected)/(admin)" />;
-  } else if (userType === "user") {
+  if (isAdmin) {
+    return <Redirect href="/(protected)/(admin)/events" />;
+  } else if (isUser) {
     return <Redirect href="/(protected)/(tabs)" />;
   } else {
     return <Redirect href="/welcome" />;

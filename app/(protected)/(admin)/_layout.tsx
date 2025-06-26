@@ -3,7 +3,7 @@ import { Tabs } from "expo-router";
 import { House, Calendar, Tickets, User } from "lucide-react-native";
 import { AdminClubProvider } from "@/context/club-provider";
 
-export default function TabsLayout() {
+export default function AdminLayout() {
   return (
     <AdminClubProvider>
       <Tabs
@@ -19,13 +19,6 @@ export default function TabsLayout() {
         }}
       >
         <Tabs.Screen
-          name="index"
-          options={{
-            title: "Accueil",
-            tabBarIcon: ({ color }) => <House size={24} color={color} />,
-          }}
-        />
-        <Tabs.Screen
           name="events"
           options={{
             title: "Évènements",
@@ -33,10 +26,17 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="tickets"
+          name="qr-code"
           options={{
-            title: "Mes tickets",
+            title: "Scanner",
             tabBarIcon: ({ color }) => <Tickets size={24} color={color} />,
+          }}
+        />
+        <Tabs.Screen
+          name="users"
+          options={{
+            title: "Utilisateurs",
+            tabBarIcon: ({ color }) => <House size={24} color={color} />,
           }}
         />
         <Tabs.Screen
