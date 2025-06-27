@@ -7,6 +7,7 @@ import { router } from "expo-router";
 import { useUser } from "@/context/user-provider";
 import { ClubSelector } from "@/components/club-selection";
 import { useClubSelection } from "@/hooks/useClubSelection";
+import { useEvents } from "@/context/event-provider";
 
 const mockEvents = [
   {
@@ -23,6 +24,7 @@ export default function Home() {
   const { user, profile, getDisplayName } = useUser();
   const name = getDisplayName();
   const { allClubs, selectedClub, selectClub } = useClubSelection();
+  const { events, isLoading, isError } = useEvents();
 
   return (
     <SafeAreaProvider>
@@ -74,12 +76,19 @@ export default function Home() {
             </View>
 
             <View className="my-5 flex-col gap-6">
-              {mockEvents.map((event) => (
+              {events?.map((event) => (
                 <View key={event.id}>
                   <EventCard
                     id={event.id}
-                    title={event.title}
-                    date={event.date}
+                    title={event.name}
+                    image_url={event.image_url}
+                    date={new Date(event.event_date).toLocaleString("fr-FR", {
+                      weekday: "long",
+                      day: "numeric",
+                      month: "long",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
                   />
                 </View>
               ))}
